@@ -13,6 +13,6 @@ export default new DataSource({
     database: process.env.DB_DATABASE,
     entities: [`${__dirname}/../../modules/**/*.entity.{ts,js}`],
     migrations: [`${__dirname}/../../database/migrations/*{.ts,.js}`],
-    synchronize: process.env.APP_ENV === 'local', // Only sync in local environment
+    // synchronize: process.env.APP_ENV === 'local', // Only sync in local environment
     logging: process.env.APP_ENV === 'local',
 })
