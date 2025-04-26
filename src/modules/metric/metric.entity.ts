@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, JoinColumn } from 'typeorm';
 import { User } from '../user/user.entity';
 
 export enum MetricType {
@@ -17,10 +17,13 @@ export enum MetricUnit {
     KELVIN = 'kelvin'
 }
 
-@Entity()
+@Entity({ name: 'metrics' })
 export class Metric {
     @PrimaryGeneratedColumn()
     id: number;
+
+    @Column({ name: 'user_id' })
+    userId: number;
 
     @Column({
         type: 'enum',
@@ -40,12 +43,13 @@ export class Metric {
     })
     unit: MetricUnit;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ name: 'updated_at' })
     updatedAt: Date;
 
     @ManyToOne(() => User, user => user.metrics)
+    @JoinColumn({ name: 'user_id' })
     user: User;
 }
