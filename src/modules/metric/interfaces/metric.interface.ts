@@ -27,4 +27,10 @@ export interface IMetric {
 
 export interface IMetricUnitConverter {
     convert(value: number, fromUnit: string, toUnit: string): number;
+}
+
+export enum PeriodRange {
+    LAST_MONTH = 'last_month',
+    LAST_TWO_MONTHS = 'last_two_months',
+    LAST_3_MONTHS = 'last_3_months',
 } 

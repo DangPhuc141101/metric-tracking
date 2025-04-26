@@ -1,7 +1,7 @@
 import { Controller, Post, Body, UsePipes, ValidationPipe, Request, UseGuards, Get, Query } from '@nestjs/common';
 import { MetricsService } from './metric.service';
 import { Metric } from './metric.entity';
-import { CreateMetricDto, ListMetricsQueriesDto } from './dtos';
+import { CreateMetricDto, ListMetricsQueriesDto, ListMetricsChartQueriesDto } from './dtos';
 import { AuthGuard } from '@providers/guards/auth.guard';
 
 @Controller('metrics')
@@ -22,5 +22,13 @@ export class MetricsController {
         @Request() req
     ): Promise<Metric[]> {
         return await this.metricsService.findAll(query, req.user.id);
+    }
+
+    @Get('chart')
+    @UseGuards(AuthGuard)
+    async getSummary(
+        @Query() query: ListMetricsChartQueriesDto,
+        @Request() req): Promise<Metric[]> {
+        return await this.metricsService.getDailyLatestMetrics(query, req.user.id);
     }
 }
