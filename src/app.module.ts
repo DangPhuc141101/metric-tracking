@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
+import dataSource from '@common/configs/data-source.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import dataSourceConfig from '@common/configs/data-source.config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { MetricModule } from './modules/metric/metric.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(dataSourceConfig.options)],
+  imports: [TypeOrmModule.forRoot(dataSource.options), MetricModule],
   controllers: [AppController],
   providers: [AppService],
 })
