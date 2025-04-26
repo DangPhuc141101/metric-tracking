@@ -40,4 +40,3 @@ export class CreateMetricDto {
     @Type(() => Date)
     date: Date;
 }
-
