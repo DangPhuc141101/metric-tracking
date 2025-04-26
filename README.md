@@ -32,6 +32,13 @@
 $ yarn install
 ```
 
+
+## Start Database
+
+```bash
+$ docker-compose up -d db
+```
+
 ## Running the app
 
 ```bash
